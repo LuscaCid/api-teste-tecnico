@@ -1,0 +1,29 @@
+-- Technical test ( Controle de estacionamento )
+
+// config //
+
+✔ DBConnection: @done(24-03-29 08:52)
+  ✔ PDO @done(24-03-29 08:51)
+
+
+
+// endpoints // 
+✔ Categories: @done(24-03-29 20:04)
+  ✔ Routes @done(24-03-29 20:04)
+  ✔ Controllers @done(24-03-29 20:04)
+  ✔ Services @done(24-03-29 20:04)
+  
+Vehicles:
+  ☐ Routes
+  ☐ Controllers
+  ☐ Services
+  
+Inputs:
+  ☐ Routes
+  ☐ Controllers
+  ☐ Services
+
+Outputs:
+  ☐ Routes
+  ☐ Controllers
+  ☐ Services

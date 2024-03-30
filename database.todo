@@ -1,0 +1,22 @@
+ -- database section 
+
+ // database entities
+
+Vehicles:
+  ✔ id @done(24-03-29 08:49)
+  ✔ model @done(24-03-29 08:47)
+  ✔ license_plate @done(24-03-29 08:47)
+  ✔ created_at @done(24-03-29 08:47)
+  ✔ category_id @done(24-03-29 08:49)
+
+Users:
+  ✔ id @done(24-03-29 08:50)
+  ✔ username @done(24-03-29 08:51)
+  ✔ password @done(24-03-29 08:51)
+  ✔ created_at @done(24-03-29 08:51)
+
+Categories:
+  ☐ id
+  ☐ type
+  ☐ parking_fee 
+  
