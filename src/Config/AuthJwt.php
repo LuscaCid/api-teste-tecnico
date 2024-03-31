@@ -6,13 +6,13 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 class AuthJwtService extends BaseRoutes{
   private $object;
-  public static $secret = "428347892347982347289";
+  public static $secret = "428347892347982347289"; // only for development
   public function __construct($object){
     $this->object = $object;
   }
   
   public static function encodeToken($payload) {
-    try {
+    try { // payload contains data that i want to put inside token
       $token =  JWT::encode($payload, self::$secret, 'HS256');
       return $token;
     } catch (Exception $e) {

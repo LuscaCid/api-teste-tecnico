@@ -17,7 +17,6 @@ class Outputs_services extends FindVehicleByLicensePlateService{
     }
     // vehicle_id will be used for another fetch to catch the hash code present inside the input
 
-    var_dump($input_link_code);
    $sql = "INSERT INTO outputs (vehicle_id, outputted_at, final_price, permanence_time, input_link_code) 
    VALUES (
       {$vehicle_id}, '{$outputted_at}', {$price}, '{$hours} horas.', '{$input_link_code}'
@@ -28,7 +27,9 @@ class Outputs_services extends FindVehicleByLicensePlateService{
       $response = $result->fetch(PDO::FETCH_ASSOC);
       return $response;
     } catch (Exception $e) { 
+      http_response_code(500);
       echo json_encode(["error" => $e->getMessage()]);
+      exit;
     }
    
   }
@@ -47,7 +48,9 @@ class Outputs_services extends FindVehicleByLicensePlateService{
       $response = $result->fetch(PDO::FETCH_ASSOC);
       return $response;
     } catch (Exception $e) {
-      echo $e->getMessage();
+      http_response_code(500);
+      echo json_encode(["error" => $e->getMessage()]);
+      exit;
     }
       
   }
@@ -63,7 +66,8 @@ class Outputs_services extends FindVehicleByLicensePlateService{
       $response = $result->fetch(PDO::FETCH_ASSOC);
       return $response;
     } catch (Exception $e) { 
-      echo json_encode(["error2" => $e->getMessage()]);
+      http_response_code(500);
+      echo json_encode(["error" => $e->getMessage()]);
       exit;
     }
   }

@@ -22,15 +22,17 @@ class Vehicles_service {
       $response = $this->dbInstance->queryExec($sql)->fetchAll(PDO::FETCH_ASSOC);
       return $response;
     } catch ( PDOException $e ) { 
-      return $e->getMessage();
+      http_response_code(500);
+      echo json_encode(["error" =>$e->getMessage()]) ;
+      exit;
     } 
   }
 
 
   public function getVehicleByLicensePlate( $licensePlate ) {
-    $sql = "SELECT * from vehicles 
-    INNER JOIN users ON users.id = vehicles.created_by
-    INNER JOIN categories ON vehicles.category_id = categories.id
+    $sql = "SELECT u.email as created_by, c.type, c.parking_fee, v.model, v.license_plate, v.created_at from vehicles as v 
+    INNER JOIN users as u ON u.id = v.created_by
+    INNER JOIN categories as c ON v.category_id = c.id
     WHERE license_plate = '{$licensePlate}' ;";
 
     try {
@@ -39,7 +41,9 @@ class Vehicles_service {
     return $result;
 
     } catch (PDOException $e) {
-      return $e->getMessage();
+      http_response_code(500);
+      echo json_encode(["error" =>$e->getMessage()]);
+      exit;
     }
   }
   private function verifyCategoryExists($form) {
@@ -47,8 +51,14 @@ class Vehicles_service {
       $category_id = $form["category_id"];
     }
     $sql = "SELECT * FROM categories WHERE id = {$category_id};";
-    $results = $this->dbInstance->queryExec($sql)->fetch(PDO::FETCH_ASSOC);
-    return $results;
+    try {
+      $results = $this->dbInstance->queryExec($sql)->fetch(PDO::FETCH_ASSOC);
+      return $results;
+    }  catch ( PDOException $e ) {
+      http_response_code(500);
+      echo json_encode(array("error"=> $e->getMessage()));
+      exit;
+    }
   }
   public function insertVehicle($form){
     $userID = $_SESSION['user_id'];
@@ -87,7 +97,9 @@ class Vehicles_service {
       $response = $this->dbInstance->queryExec($sql)->fetchAll(PDO::FETCH_ASSOC);
       return $response;
     } catch (PDOException $e) {
-      return $e->getMessage();
+      http_response_code(500);
+      echo json_encode(["error" => $e->getMessage()]) ;
+      exit;
     }
 
   }
@@ -98,11 +110,31 @@ class Vehicles_service {
     $result = $this->dbInstance->queryExec($sql)->fetchAll(PDO::FETCH_ASSOC);
     if(array_key_exists("id", $result)) { $vehicle_id = $result["id"]; }
 
-    $sql = "SELECT v.license_plate, v.model, i.inputted_at, o.outputted_at, o.final_price, o.permanence_time, c.type FROM vehicles as v
+    $sql = "SELECT i.id as record_id, v.license_plate, v.model, i.inputted_at, o.outputted_at, o.final_price, o.permanence_time, c.type FROM vehicles as v
     INNER JOIN categories as c ON v.category_id = c.id
     INNER JOIN inputs_history as i ON i.vehicle_id = v.id
     INNER JOIN outputs_history as o ON o.input_link_code = i.link_code
     WHERE license_plate = '{$license_plate}';";
+
+    try {
+      $result = $this->dbInstance->queryExec($sql)->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+    } catch (Exception $e) {
+      http_response_code(500);
+      echo json_encode(["error"=> $e->getMessage()] );
+      exit;
+    }
+  }
+
+  public function getVehiclesReports(int $page) {
+    $limit = 5;
+    $begin = ($page * $limit) - $limit;
+
+    $sql = "SELECT i.id as record_id, v.license_plate, v.model, i.inputted_at, o.outputted_at, o.final_price, o.permanence_time, c.type FROM vehicles as v
+    INNER JOIN categories as c ON v.category_id = c.id
+    INNER JOIN inputs_history as i ON i.vehicle_id = v.id
+    INNER JOIN outputs_history as o ON o.input_link_code = i.link_code
+    LIMIT {$begin}, {$limit}  ;";
 
     try {
       $result = $this->dbInstance->queryExec($sql)->fetchAll(PDO::FETCH_ASSOC);

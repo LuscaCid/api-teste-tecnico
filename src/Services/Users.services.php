@@ -11,8 +11,10 @@ class Users_services {
       $result = $this->dbInstance->queryExec($sql);
       $response = $result->fetch(PDO::FETCH_ASSOC);
       return $response;
-    } catch (PDOException $e) {  
-      return $e->getMessage();
+    } catch (PDOException $e) {
+      http_response_code(500);  
+      echo json_encode(["error"=> $e->getMessage()]);
+      exit;
     }
   }
   public function checkUserExists(string $email) {
@@ -22,7 +24,9 @@ class Users_services {
       $response = $result->fetch(PDO::FETCH_ASSOC);
       return $response;
     } catch (PDOException $e) {  
-      return $e->getMessage();
+      http_response_code(500);
+      echo json_encode(["error" =>  $e->getMessage()] );
+      exit;
     }
 
   }

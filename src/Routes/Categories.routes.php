@@ -10,28 +10,26 @@ class Categories_routes extends BaseRoutes {
     $this->categoriesController = new Categories_controller($categoriesService);
   }
 
-  public function loadCategoriesRoutes() { // controllers its called here
+  public function loadCategoriesRoutes() {
     $path_exploded = explode("/", $this->path);
     switch ($this->path) {
       case "categories/view":
-        
         if($this->method == "GET") {
           $this->categoriesController->getCategories();
-        } else { echo json_encode(["error"=> "Not found"]); }
-
+        } 
         break;
       case "categories/create":
         if($this->method == "POST") {
-          http_response_code(201);
           $this->categoriesController->createCategory($this->post_form);
         }
 
         break;
+        // categories/view/:param
       case $path_exploded[0] == "categories" && $path_exploded[1]== "view" && $path_exploded[2] != "":
         if($this->method == "GET") {  
-          http_response_code(200);
           $this->categoriesController->getCategoryByType($path_exploded[2]);
         }
+
         break;
       default :
         http_response_code(404);

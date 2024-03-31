@@ -15,6 +15,12 @@ class Categories_controller {
 
   public function getCategoryByType($param) {
     $category = $this->categoriesService->getCategoryByType($param);
+    if(empty($category)) {
+      http_response_code(404);
+      echo json_encode(array("error"=> "Nenhuma categoria encontrada."));
+      exit;
+    }
+    http_response_code(200);
     echo json_encode($category);
   }
 
@@ -39,6 +45,7 @@ class Categories_controller {
       exit;
     }
     $response = $this->categoriesService->createCategory($type, $parking_fee);
+    http_response_code(201);
     echo json_encode(["response" => $response]); 
   }
   

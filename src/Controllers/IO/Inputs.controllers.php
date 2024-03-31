@@ -16,7 +16,7 @@ class Inputs_controllers {
     }
 
     $this->inputsService->emitInput($license_plate);
-    
+    http_response_code(201);
     echo json_encode( ["response" => "Entrada gerada." ] );
     exit;
   }

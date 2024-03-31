@@ -12,7 +12,8 @@ class FindVehicleByLicensePlateService {
       $object = $result->fetch( PDO::FETCH_ASSOC);
       return $object; // return vehicle with vehicle_id
     } catch (Exception $e) {
-      echo json_encode([''=> $e->getMessage()]);
+      http_response_code(500);
+      echo json_encode(['error'=> $e->getMessage()]);
       exit;
     }
   }

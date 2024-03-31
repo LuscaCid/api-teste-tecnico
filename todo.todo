@@ -1,11 +1,11 @@
 -- Technical test ( Controle de estacionamento )
 
 // config //
+JWTAuth:
+  ✔ AuthGuard @done(24-03-31 00:59)
 
 ✔ DBConnection: @done(24-03-29 08:52)
   ✔ PDO @done(24-03-29 08:51)
-
-
 
 // endpoints // 
 ✔ Categories: @done(24-03-29 20:04)
@@ -14,16 +14,21 @@
   ✔ Services @done(24-03-29 20:04)
   
 Vehicles:
-  ☐ Routes
-  ☐ Controllers
-  ☐ Services
+  ✔ Routes @done(24-03-31 00:58)
+  ✔ Controllers @done(24-03-31 00:58)
+  ✔ Services @done(24-03-31 00:58)
   
 Inputs:
-  ☐ Routes
-  ☐ Controllers
-  ☐ Services
+  ✔ Routes @done(24-03-31 00:59)
+  ✔ Controllers @done(24-03-31 00:59)
+  ✔ Services @done(24-03-31 00:59)
 
 Outputs:
-  ☐ Routes
-  ☐ Controllers
-  ☐ Services
+  ✔ Routes @done(24-03-31 00:59)
+  ✔ Controllers @done(24-03-31 00:59)
+  ✔ Services @done(24-03-31 00:59)
+
+Users:
+  ✔ Routes @done(24-03-31 00:59)
+  ✔ Controllers @done(24-03-31 00:59)
+  ✔ Services @done(24-03-31 00:59)

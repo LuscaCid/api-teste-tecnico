@@ -19,12 +19,9 @@ class Vehicles_routes extends BaseRoutes {
           $page = 1;
           isset( $path_exploded[2] ) && $page = $path_exploded[2];
           $this->vehilesControllers->view( $page );
-        } else { 
-          http_response_code(404);
-          json_encode(["error" => "not found"]);
-        }
+        } 
         break;
-        // vehicles/license/:license
+        // vehicles/license/:license_plate
       case $path_exploded[0] == "vehicles" && $path_exploded[1] == "license" : 
         if($this->method == "GET") {
           if(isset($path_exploded[2])) {
@@ -47,11 +44,18 @@ class Vehicles_routes extends BaseRoutes {
           $license_plate = $path_exploded[2];
           $this->vehilesControllers->vehicleReport($license_plate);
         }
-        //need to create vehicles/history/:vehicle_id/
         break;
+        // vehicles/vehicles_reports/:page
+        case $path_exploded[0] == "vehicles" && $path_exploded[1] == "vehicles_reports":
+          if($this->method == "GET") {
+            isset( $path_exploded[2] ) && $page = $path_exploded[2];
+            $this->vehilesControllers->vehiclesReportsPaginated( $page );
+          }
+          break;
       default: 
         http_response_code(404);
         echo json_encode( ["error"=> "Not Found."] );
+        exit;
     }
   }
 }

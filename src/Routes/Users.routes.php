@@ -20,11 +20,7 @@ class Users_routes extends BaseRoutes{
           $this->usersControllers->signIn(post_form: $this->post_form);
         }
       break;
-      case 'users/revoke_account':
-        if($this->method == 'POST' && $this->post_form[0] == "DELETE") {
-          $this->usersControllers->revokeAccount($this->post_form);
-        }
-        break;
+      
       default:
         http_response_code(404);
         json_encode(["Error" => "Not Found"]);

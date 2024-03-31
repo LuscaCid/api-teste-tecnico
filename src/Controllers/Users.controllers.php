@@ -39,12 +39,15 @@ class Users_controllers {
     }
     
     $token = AuthJwtService::encodeToken(array("email" => $email));
+    
+    $_SESSION["user_id"] = $user_id;
+    $_SESSION["email"] = $email;
+
     http_response_code(200);
     echo json_encode([
-      "token"=> $token, 
+      "access_token"=> $token, 
       "message" => "Login feito com sucesso."
     ]);
-    $_SESSION["user_id"] = $user_id;
   }
   public function signUp($post_form) {
     if(array_key_exists("email", $post_form) && array_key_exists("password", $post_form)) { 
@@ -57,18 +60,13 @@ class Users_controllers {
       exit;
     }
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $res = $this->userService->insertUser($email, $hashedPassword);
+    $this->userService->insertUser($email, $hashedPassword);
   
     http_response_code(201);
     echo json_encode([
-      "Response"=> $res,
       "message" => "Usuário cadastrado."
     ]);
     exit;
   }
-  public function revokeAccount($post_form) {
-    if(array_key_exists("password", $post_form)){
-
-    }
-  }
+  
 }

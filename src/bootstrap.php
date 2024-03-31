@@ -20,6 +20,7 @@ class Bootstrap extends BaseRoutes{
   public function load() {
     $api_segment = explode("/", $this->path); //selecting the section
     $AuthGuard = new AuthJwtService($this->object);
+    
     switch ($api_segment[0]) {
       case "users":
         $usersRoutes = new Users_routes($this->object);
