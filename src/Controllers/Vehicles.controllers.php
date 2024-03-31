@@ -32,7 +32,17 @@ class Vehicles_controllers {
       return;
     } 
     $this->vehiclesService->insertVehicle($post_form);
-    echo json_encode(["response"=> "created"]);
+    echo json_encode(["response"=> "Veículo criado."]);
     http_response_code(201);
+  }
+
+  public function vehicleReport($license_plate) {
+    $response = $this->vehiclesService->getVehicleReport($license_plate);
+    http_response_code(200);
+    echo json_encode(["Historico_relatorio" => $response]);
+
+  }
+  public function vehiclesReportPaginated(int $page, int $limit){ 
+    // logic to be implemented
   }
 }

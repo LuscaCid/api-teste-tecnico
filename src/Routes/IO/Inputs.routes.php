@@ -14,12 +14,12 @@ class Inputs_routes extends BaseRoutes {
   public function loadInputsRoutes() {
     $path_exploded = explode("/", $this->path);
     switch($this->path) {
-      // inputs/emit/:vehicle_id
+      // inputs/emit/:license_plate
       case $path_exploded[0] == "inputs" && $path_exploded[1]== "emit" && $path_exploded[2] != "":
         
         if($this->method == "POST") {
-          $vehicle_id = $path_exploded[2];
-          $this->inputsControllers->emitInput(vehicle_id: $vehicle_id);
+          $license_plate = $path_exploded[2];
+          $this->inputsControllers->emitInput(license_plate: $license_plate );
         }
         break;
     }

@@ -41,9 +41,14 @@ class Vehicles_routes extends BaseRoutes {
           $this->vehilesControllers->createVehicle($this->post_form);
         }
         break;
-
+        //vehicles/vehicle_report/:license_plate
+      case $path_exploded[0] == "vehicles" && $path_exploded[1] == "vehicle_report":
+        if($this->method == "GET") {
+          $license_plate = $path_exploded[2];
+          $this->vehilesControllers->vehicleReport($license_plate);
+        }
         //need to create vehicles/history/:vehicle_id/
-
+        break;
       default: 
         http_response_code(404);
         echo json_encode( ["error"=> "Not Found."] );

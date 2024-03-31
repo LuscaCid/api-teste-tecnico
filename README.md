@@ -13,7 +13,7 @@ Aumento do escopo:
 - visualizacao de veiculo com dados do usuario que cadastrou e qual a sua categoria
 - Cadrasto de usuarios para manipulação da aplicação
 - Apenas usuários com tokens válidos podem fazer alterações/leituras
-- paginacao de fetch de veiculos
+- paginacao de busca por veiculos
 
 ## Organização do Projeto
 
@@ -33,9 +33,6 @@ O projeto está estruturado da seguinte maneira:
 
 Para executar este sistema, é necessário ter um servidor web (como Apache) e um servidor de banco de dados MySQL configurados.
 
-## Configuração do Banco de Dados
-
-Antes de executar o sistema, é necessário configurar o banco de dados. Você pode importar o arquivo `estacionamento.sql` localizado na raiz do projeto para criar a estrutura do banco de dados e inserir alguns dados de exemplo.
 
 ## Como Utilizar
 
@@ -49,4 +46,4 @@ Antes de executar o sistema, é necessário configurar o banco de dados. Você p
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ---
-Criado por [Seu Nome] - [Seu Email]
+Criado por Lucas Felipe Lima Cid - lucasfelipaaa@gmail.com

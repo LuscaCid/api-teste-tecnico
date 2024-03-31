@@ -12,14 +12,17 @@ class Outputs_routes extends BaseRoutes{
   public function loadOutputsRoutes () {
     $path_exploded = explode("/", $this->path);
     switch ($this->path) {
-      // outputs/emit/:vehicle_id
+      // outputs/emit/:license_plate
       case $path_exploded[0] == "outputs" && $path_exploded[1]== "emit" && $path_exploded[2] != "":
         
         if($this->method == "POST") {
-          $vehicle_id = $path_exploded[2];
-          $this->outputsControllers->emitOutput(vehicle_id: $vehicle_id);
+          $license_plate = $path_exploded[2];
+          $this->outputsControllers->emitOutput(license_plate: $license_plate);
         }
         break;
-    }
+      default:
+        http_response_code(404);
+        echo json_encode(["error" => "Not found"]);
     }
   }
+}
