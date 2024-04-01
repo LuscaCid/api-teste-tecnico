@@ -13,8 +13,9 @@ class Vehicles_service {
     $limit = 5;
     $begin = ($page * $limit) - $limit;
 
-    $sql = "SELECT * FROM vehicles  
-    INNER JOIN categories ON vehicles.category_id = categories.id
+    $sql = "SELECT v.license_plate, u.email as created_by, c.type, c.parking_fee, v.model, v.created_at FROM vehicles as v 
+    INNER JOIN categories as c ON v.category_id = c.id
+    INNER JOIN users as u  ON v.created_by = u.id
     ORDER BY model 
     LIMIT {$begin}, {$limit} ;";
 

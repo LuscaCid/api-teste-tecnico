@@ -6,7 +6,7 @@ class DbConnectionService { // a instancia disso me permite executar a query
   public function __construct( ) {
     $username = "root";
     $password = "";
-    $database = "parking_db";
+    $database =  "parking_db";
     $host = "localhost";
     try {
       $this->PDO = new PDO("mysql:host={$host};dbname={$database}", $username, $password);

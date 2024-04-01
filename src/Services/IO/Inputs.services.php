@@ -28,6 +28,10 @@ class Inputs_services extends FindVehicleByLicensePlateService {
   public function verifyItAlreadyInputted ($license_plate) {
 
     $vehicle = $this->findVehivleByLicensePlate($license_plate);
+    if(!$vehicle) {
+      http_response_code(404);
+      echo json_encode(["error" => "Veiculo com placa passada nao registrado"]);
+    }
     if(array_key_exists("id", $vehicle)) $vehicle_id = $vehicle["id"];
 
     $sql = "SELECT * FROM inputs WHERE vehicle_id = {$vehicle_id}";

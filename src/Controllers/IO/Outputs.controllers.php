@@ -31,7 +31,6 @@ class Outputs_controllers {
 
     $vehicle_category_fee = $this->outputs_services->getVehicleCaregoryFee($license_plate);
 
-   
     $price = intval($vehicle_category_fee["parking_fee"]) * $hours;
     // with $hours, i will take the parking fee inside category and only multiply 
     $outputted_at = $outputted_at->format("Y-m-d H:i:s");

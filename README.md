@@ -22,6 +22,7 @@ O projeto está estruturado da seguinte maneira:
 - **`index.php`**: Arquivo principal que contém a interface de usuário e as chamadas para as operações do sistema.
 
 - **`src/`**: Diretório que contém toda a aplicação.
+  - **`bootstrap.php/`**: Arquivo que direciona a aplicacao e distribui dados
   - **`classes/`**: Diretório que contém as classes PHP do sistema.
   - **`Controllers/`**: Diretório que contém a lógica das regras de negócios.
   - **`Routes/`**: Diretório que contém as rotas que sao disparadas pela classe bootstrap.
@@ -34,6 +35,9 @@ O projeto está estruturado da seguinte maneira:
 
 Para executar este sistema, é necessário ter um servidor web (como Apache, eu usei o xampp para iniciar) e um servidor de banco de dados MySQL configurados.
 
+### Nota de esclarecimento:
+
+-- Devido ao fato de eu ter tido que aprender a desenvolver num ambiente novo que é o php em tao pouco tempo, não tive como implementar o uso de docker para criar as imagens do apache para o servidor web php e a imagem do banco de dados mysql
 
 ## Como Utilizar
 
