@@ -1,4 +1,4 @@
-# Controle de Estacionamento
+# Controle de Estacionamento ( Teste técnico )
 
 Este é um sistema para controle de estacionamento que permite as seguintes operações:
 
@@ -14,22 +14,22 @@ Aumento do escopo:
 - Cadrasto de usuarios para manipulação da aplicação
 - Apenas usuários com tokens válidos podem fazer alterações/leituras
 - paginacao de busca por veiculos e as suas movimentações
+- autenticação de rotas da aplicação (rotas que nao sao para signin/signup)
 
 ## Organização do Projeto
 
 O projeto está estruturado da seguinte maneira:
 
 - **`index.php`**: Arquivo principal que contém a interface de usuário e as chamadas para as operações do sistema.
-
 - **`src/`**: Diretório que contém toda a aplicação.
   - **`bootstrap.php/`**: Arquivo que direciona a aplicacao e distribui dados
-  - **`classes/`**: Diretório que contém as classes PHP do sistema.
+  - **`classes/`**: Diretório que contém a classe base de rotas do sistema.
   - **`Controllers/`**: Diretório que contém a lógica das regras de negócios.
   - **`Routes/`**: Diretório que contém as rotas que sao disparadas pela classe bootstrap.
   - **`Services/`**: Diretório que contém as classes responsáveis por realizar alterações no banco de dados.
+  -**`Config/`**  
     - **`AuthJwt.php`**: Configuração para lidar com as rotas autenticadas, validação e geracao de token a partir de secret.
     - **`DbConnection.php`**: Arquivo para realizar a conexão com o banco de dados.
-- **`README.md`**: Este arquivo que contém informações sobre o projeto e sua utilização.
 
 ## Pré-requisitos
 
