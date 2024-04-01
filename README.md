@@ -27,7 +27,7 @@ O projeto está estruturado da seguinte maneira:
   - **`Controllers/`**: Diretório que contém a lógica das regras de negócios.
   - **`Routes/`**: Diretório que contém as rotas que sao disparadas pela classe bootstrap.
   - **`Services/`**: Diretório que contém as classes responsáveis por realizar alterações no banco de dados.
-    - **`AuthJwt.php`**: Configuração para lidar com as rotas autenticadas.
+    - **`AuthJwt.php`**: Configuração para lidar com as rotas autenticadas, validação e geracao de token a partir de secret.
     - **`DbConnection.php`**: Arquivo para realizar a conexão com o banco de dados.
 - **`README.md`**: Este arquivo que contém informações sobre o projeto e sua utilização.
 
@@ -37,14 +37,14 @@ Para executar este sistema, é necessário ter um servidor web (como Apache, eu 
 
 ### Nota de esclarecimento:
 
--- Devido ao fato de eu ter tido que aprender a desenvolver num ambiente novo que é o php em tao pouco tempo, não tive como implementar o uso de docker para criar as imagens do apache para o servidor web php e a imagem do banco de dados mysql
+Devido ao fato de eu ter tido que aprender a desenvolver num ambiente novo que é o php em tao pouco tempo, não tive como implementar o uso de docker para criar as imagens do apache para o servidor web php e a imagem do banco de dados mysql. Gostaria de ter tido mais tempo para implementar esta funcionalidade.
 
 ## Como Utilizar
 
 1. Clone este repositório para o diretório do seu servidor web.
 2. Configure o banco de dados conforme descrito acima.
 3. Abra o navegador e acesse o diretório onde o projeto foi clonado.
-4. Siga as instruções na interface para realizar as operações de cadastro de categorias, veículos, entrada e saída de veículos, e demonstração de informações.
+4. Siga as instruções no arquivo "endpoints.md" para realizar as operações de cadastro de categorias, veículos, entrada e saída de veículos, e demonstração de informações.
 
 ## Licença
 
