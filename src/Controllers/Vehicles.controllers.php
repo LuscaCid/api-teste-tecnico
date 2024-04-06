@@ -52,5 +52,47 @@ class Vehicles_controllers {
 
   }
 
+  public function setVehicleImage(int $vehicle_id) {
+    isset($_FILES["vehicle_image"]) && $file = $_FILES["vehicle_image"];
+
+    $permittedExtensions = array('pdf','jpg','png');
+
+    $file_name = uniqid() . '-' . basename($file['name']);
+
+    $fileExtension = pathinfo($file_name, PATHINFO_EXTENSION);
+
+    $uploadPath = 'C:\xampp\htdocs\api_parking\uploads\\' . $file_name;
+    if($file["size"] > 3000000) {
+      http_response_code(401);
+      echo json_encode(["error" => "Arquivo pesado demais para sofrer upload."]);
+      exit;
+    }
+    if(!in_array(strtolower($fileExtension), $permittedExtensions)) {
+      http_response_code(401);
+      echo json_encode(["error" => "Apenas arquivos de imagem podem sofrer upload."]);
+      exit;
+
+    } 
+    
+    if(!move_uploaded_file($file['tmp_name'], $uploadPath)) {
+      http_response_code(500);
+      json_encode(["error" => "Não foi possivel salvar o arquivo"]);
+      exit;
+    }
+    http_response_code(200);
+    echo json_encode(["response" => "Arquivo salvo com sucesso!"]);
+    exit;
+   }
+
+   private function saveInDatabase(int $vehicle_id, string $vehicle_image_path) {
+    $vehicle_exists = $this->vehiclesService->getVehicleById($vehicle_id);
+    if(!$vehicle_exists){
+      http_response_code(404);
+      echo json_encode(["error"=> "Veículo nao encontrado."]);
+      exit;
+    }
+    // now its the time to save the image unique path inside db
+
+   }
   
 }

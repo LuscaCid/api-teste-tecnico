@@ -58,7 +58,18 @@ CREATE TABLE IF NOT EXISTS outputs_history (
   final_price DOUBLE NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS vehicle_has_images (
+	image_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	image_name VARCHAR(255),
+  path VARCHAR (255),
+  vehicle_id INT,
+  inserted_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 -- constraints added
+
+ALTER TABLE vehicle_has_images 
+ADD CONSTRAINT FOREIGN KEY (vehicle_id) REFERENCES vehicles(id)
 
 ALTER TABLE vehicles 
 ADD CONSTRAINT FOREIGN KEY (category_id) REFERENCES categories(id);

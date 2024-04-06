@@ -52,6 +52,13 @@ class Vehicles_routes extends BaseRoutes {
             $this->vehilesControllers->vehiclesReportsPaginated( $page );
           }
           break;
+        case  $path_exploded[0] == "vehicles" && $path_exploded[1] == "set_image" && $path_exploded[2] != "" :
+          if($this->method == "POST") {
+            $vehicle_id = intval($path_exploded[2]);
+            $this->vehilesControllers->setVehicleImage($vehicle_id);
+            // this controller takes the file from frontend by posting encType = multipart/data
+          } 
+          break;
       default: 
         http_response_code(404);
         echo json_encode( ["error"=> "Not Found."] );

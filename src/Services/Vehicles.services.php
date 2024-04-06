@@ -29,7 +29,18 @@ class Vehicles_service {
     } 
   }
 
-
+  public function getVehicleById ($id) {
+    $sql = "SELECT * FROM vehicles WHERE id = {$id}";
+    try {
+      $result = $this->dbInstance->queryExec($sql);
+      $response = $result->fetch();
+      return $response;
+    } catch (PDOException $e){
+      http_response_code(500);
+      json_encode(array("error"=>$e->getMessage())) ;
+    }
+ 
+  }
   public function getVehicleByLicensePlate( $licensePlate ) {
     $sql = "SELECT u.email as created_by, c.type, c.parking_fee, v.model, v.license_plate, v.created_at from vehicles as v 
     INNER JOIN users as u ON u.id = v.created_by
