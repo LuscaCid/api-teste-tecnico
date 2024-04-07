@@ -113,7 +113,6 @@ class Vehicles_service {
       echo json_encode(["error" => $e->getMessage()]) ;
       exit;
     }
-
   }
 
   public function getVehicleReport($license_plate) {
@@ -122,10 +121,12 @@ class Vehicles_service {
     $result = $this->dbInstance->queryExec($sql)->fetchAll(PDO::FETCH_ASSOC);
     if(array_key_exists("id", $result)) { $vehicle_id = $result["id"]; }
 
-    $sql = "SELECT i.id as record_id, v.license_plate, v.model, i.inputted_at, o.outputted_at, o.final_price, o.permanence_time, c.type FROM vehicles as v
+    $sql = "SELECT i.id as record_id, v.license_plate, v.model, i.inputted_at, o.outputted_at, o.final_price, o.permanence_time, c.type, vi.image_path, vi.image_name FROM vehicles as v
     INNER JOIN categories as c ON v.category_id = c.id
     INNER JOIN inputs_history as i ON i.vehicle_id = v.id
     INNER JOIN outputs_history as o ON o.input_link_code = i.link_code
+    LEFT JOIN vehicle_has_images as vi ON vi.vehicle_id = v.id
+
     WHERE license_plate = '{$license_plate}';";
 
     try {
@@ -142,16 +143,32 @@ class Vehicles_service {
     $limit = 5;
     $begin = ($page * $limit) - $limit;
 
-    $sql = "SELECT i.id as record_id, v.license_plate, v.model, i.inputted_at, o.outputted_at, o.final_price, o.permanence_time, c.type FROM vehicles as v
+    $sql = "SELECT i.id as record_id, v.license_plate, v.model, i.inputted_at, o.outputted_at, o.final_price, o.permanence_time, c.type, vi.image_path, vi.image_name FROM vehicles as v
     INNER JOIN categories as c ON v.category_id = c.id
     INNER JOIN inputs_history as i ON i.vehicle_id = v.id
     INNER JOIN outputs_history as o ON o.input_link_code = i.link_code
+    LEFT JOIN vehicle_has_images as vi ON vi.vehicle_id = v.id
     LIMIT {$begin}, {$limit}  ;";
 
     try {
       $result = $this->dbInstance->queryExec($sql)->fetchAll(PDO::FETCH_ASSOC);
       return $result;
     } catch (Exception $e) {
+      http_response_code(500);
+      echo json_encode(["error"=> $e->getMessage()] );
+      exit;
+    }
+  }
+  public function insertImageForAVehicle($vehicle_id, $file_name, $file_path){
+    var_dump($vehicle_id, $file_name, $file_path);
+    $sql = "INSERT INTO vehicle_has_images (vehicle_id, image_name, image_path ) 
+    VALUES
+    ({$vehicle_id}, '{$file_name}', '{$file_path}');
+    ";
+    try {
+      $result = $this->dbInstance->queryExec($sql);
+      return $result;
+    } catch (PDOException $e) {
       http_response_code(500);
       echo json_encode(["error"=> $e->getMessage()] );
       exit;
