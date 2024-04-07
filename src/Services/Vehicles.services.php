@@ -124,9 +124,11 @@ class Vehicles_service {
     $sql = "SELECT i.id as record_id, v.license_plate, v.model, i.inputted_at, o.outputted_at, o.final_price, o.permanence_time, c.type, vi.image_path, vi.image_name FROM vehicles as v
     INNER JOIN categories as c ON v.category_id = c.id
     INNER JOIN inputs_history as i ON i.vehicle_id = v.id
-    INNER JOIN outputs_history as o ON o.input_link_code = i.link_code
+    LEFT JOIN outputs_history as o ON o.input_link_code = i.link_code
     LEFT JOIN vehicle_has_images as vi ON vi.vehicle_id = v.id
-
+    AND o.ouputted_at IS NOT NULL
+    AND o.final_price IS NOT NULL
+    AND o.permanence_time IS NOT NULL
     WHERE license_plate = '{$license_plate}';";
 
     try {
@@ -146,7 +148,7 @@ class Vehicles_service {
     $sql = "SELECT i.id as record_id, v.license_plate, v.model, i.inputted_at, o.outputted_at, o.final_price, o.permanence_time, c.type, vi.image_path, vi.image_name FROM vehicles as v
     INNER JOIN categories as c ON v.category_id = c.id
     INNER JOIN inputs_history as i ON i.vehicle_id = v.id
-    INNER JOIN outputs_history as o ON o.input_link_code = i.link_code
+    LEFT JOIN outputs_history as o ON o.input_link_code = i.link_code
     LEFT JOIN vehicle_has_images as vi ON vi.vehicle_id = v.id
     LIMIT {$begin}, {$limit}  ;";
 
